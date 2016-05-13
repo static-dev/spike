@@ -49,17 +49,9 @@ Spike can be accessed through the command line if installed globally through npm
 
 You can find spike's [standard starter template here](https://github.com/static-dev/spike-base), and it can be installed through [sprout](https://github.com/carrot/sprout).
 
-### Javacript API
+### App.js
 
-The Spike module exposes a single class through which all functionality operates. An instance of the class should be created for each project being compiled with Spike.
-
-```js
-import Spike from 'spike'
-
-let project = new Spike({ root: 'path/to/project/root' })
-```
-
-The above shows a minimal instantiation, but the constructor accepts a wide variety of options, listed below.
+You can configure your spike projects through a single config file at the root, `app.js`. This file is fully processed by node, so you can do what you'd like with javascript. However, in order to work with spike, it must default export an object, which can have any of the following keys:
 
 Option                 | Description                                                                                                                                                                                                                                                                                                                         | Default
 :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------
@@ -82,24 +74,6 @@ Option                 | Description                                            
 
 > **Note:** Not familiar with minimatch or micromatch? Check out the [minimatch cheat sheet](https://github.com/motemen/minimatch-cheat-sheet) and test your patterns with [globtester](http://www.globtester.com). Trust us, it's a much cleaner and easier way to write regexes for the file system : )
 
-Spike exposes a simpler and more straightforward configuration interface than if you were to set up the webpack configuration yourself. However, if you'd like to directly edit the webpack config, you can still do this after the project has been instantiated through the `config` property on each instance.
-
-```js
-let project = new Spike({ root: 'path/to/project/root' })
-console.log(project.config) // echoes bare webpack config object, can be edited
-```
-
-If you decide to edit the webpack config object directly, _be careful_. It is easy to break the way spike works without knowing exactly what you are doing here. If there's something you are looking to customize that is not part of spike' options, it's better to open an issue and ask for it to be made customizable, then we'll get you a much cleaner way to do it!
-
-Note that each project is an event emitter, and all feedback on what the project is doing will come back through events on the `project` instance. Currently the following events are supported:
-
-- `compile`: the project has finished compiling
-- `warning`: the project has emitted a warning - not fatal but should be checked out
-- `error`: the project has errored and will not complete compilation
-- `remove`: spike has removed a particular path
-
-To compile an instantiated project, you can run `project.compile()`. This method will synchronously return a unique id, which can be used to track events related to this particular compile if necessary. You must be listening for the events you are interested in **before** calling `compile` if you want to ensure that you will get all feedback.
-
 ## Environments
 
 If you have different environments you intend to deploy to that need different settings, this is **[no probalo](http://www.hrwiki.org/w/images/8/85/Senor_Cardgage_shirt_close.PNG)**. Just make a second `app.js` file, but stick the name of your environment between the `app` and the `js`, like this: `app.production.js`. Now, when you initialize spike with the `production` environment, it will merge your production config (with priority) into your normal app config.
@@ -107,7 +81,7 @@ If you have different environments you intend to deploy to that need different s
 So let's say you have an app config that looks like this:
 
 ```js
-export default {
+module.exports = {
   ignores: [...],
   locals: {
     apiUrl: 'http://localhost:3000/api/v1'
@@ -118,7 +92,7 @@ export default {
 If you wanted to update that API url to a real one for production, you could set up an `app.production.js` file that looks like this:
 
 ```js
-export default {
+module.exports = {
   locals: {
     apiUrl: 'http://real-website.com/api/v1'
   }
@@ -127,4 +101,4 @@ export default {
 
 Since the two configuration files are _merged_, you don't lose all your other settings from the `app.js` file, it just merges in any new ones from `app.production.js`. Very amaze!
 
-To change the environment, from javascript, just pass an `env` option to the spike constructor. From the CLI, just pass `--env name` or `-e name` as an argument to the `compile` or `watch` commands.
+To change the environment, just pass `--env name` or `-e name` as an argument to the `compile` or `watch` commands.
