@@ -19,14 +19,6 @@ Spike is fairly strict in enforcing a default stack. However, the stack allows f
 - [postcss](https://github.com/postcss/postcss) for CSS transforms
 - [webpack](http://webpack.github.io) as the core compiler
 
-## Setup for Contributing
-
-- Make sure you are running [node.js >= v6](https://nodejs.org/en/).
-- Make sure you have an [editorconfig plugin](http://editorconfig.org/#download) installed for your text editor
-- Make sure you have a [standard js linter](http://standardjs.com/index.html#usage) installed, tests will not pass if linting fails
-- Make sure you are familiar with [ES6](https://medium.com/sons-of-javascript/javascript-an-introduction-to-es6-1819d0d89a0f)
-- Make sure you are familiar with [test-driven development](https://www.wikiwand.com/en/Test-driven_development)
-
 ## Installation
 
 - `npm install spike -g`
@@ -34,7 +26,7 @@ Spike is fairly strict in enforcing a default stack. However, the stack allows f
 
 ## Usage
 
-Spike can operate through either a javascript API or a CLI interface. We'll break them both down below.
+Spike can operate through either a javascript API or a CLI interface. This project is just the command line interface, for more information on the js api, check out [spike-core](/static-dev/spike-core).
 
 ### Command Line Interface
 
