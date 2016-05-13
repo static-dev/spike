@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var chalk = require('chalk')
+var CLI = require('..')
+var cli = new CLI()
+
+cli.on('error', function (err) {
+  console.error(chalk.red('✗ ERROR'))
+  console.error(err.stack)
+})
+
+cli.on('warning', function (warn) {
+  console.warn(chalk.yellow('⚠ WARNING'))
+  console.warn(warn.stack)
+})
+
+cli.on('compile', function (res) {
+  var compileTime = (res.stats.endTime - res.stats.startTime) / 1000
+  console.log(chalk.green('compiled') + ' ' + chalk.gray('(' + compileTime + 's)'))
+})
+
+cli.on('success', function (msg) {
+  console.log(chalk.green('✓ ' + msg))
+})
+
+cli.on('info', function (msg) {
+  console.log(chalk.gray('▸ ' + msg))
+})
+
+cli.run(process.argv.slice(2))

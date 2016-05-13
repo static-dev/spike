@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+*.log
+test/fixtures/*/public
+coverage
+.nyc_output
