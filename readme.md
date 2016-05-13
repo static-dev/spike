@@ -26,7 +26,7 @@ Spike is fairly strict in enforcing a default stack. However, the stack allows f
 
 ## Usage
 
-Spike can operate through either a javascript API or a CLI interface. This project is just the command line interface, for more information on the js api, check out [spike-core](/static-dev/spike-core).
+Spike can operate through either a javascript API or a CLI interface. This project is just the command line interface, for more information on the js api, check out [spike-core](https://github.com/static-dev/spike-core).
 
 ### Command Line Interface
 
