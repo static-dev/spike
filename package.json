@@ -1,7 +1,7 @@
 {
   "name": "spike",
   "description": "an opinionated static build tool, powered by webpack",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "Jeff Escalante",
   "ava": {
     "verbose": "true",
