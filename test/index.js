@@ -67,7 +67,7 @@ test.cb('new', (t) => {
   cli.on('info', (opts) => {
     t.truthy(opts.root)
     t.truthy(opts.emitter)
-    t.truthy(opts.overrides)
+    t.truthy(opts.locals)
   })
   cli.on('success', (res) => {
     t.truthy(res.match(/project created at.*test/))
