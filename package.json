@@ -19,7 +19,7 @@
     "spike-core": "^0.3.0"
   },
   "devDependencies": {
-    "ava": "^0.14.0",
+    "ava": "^0.15.0",
     "coveralls": "^2.11.9",
     "nyc": "^6.4.4",
     "rewire": "^2.5.1",
