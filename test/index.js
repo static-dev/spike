@@ -30,6 +30,24 @@ class SpikeMock extends EventEmitter {
   }
 }
 
+SpikeMock.template = {
+  add: (opts) => {
+    opts.emitter.emit('success', opts)
+  },
+  remove: (opts) => {
+    opts.emitter.emit('success', opts)
+  },
+  default: (opts) => {
+    opts.emitter.emit('success', opts)
+  },
+  list: (opts) => {
+    opts.emitter.emit('success', opts)
+  },
+  reset: () => {
+    return true
+  }
+}
+
 test.beforeEach((t) => {
   CLI.__set__('Spike', SpikeMock)
   cli = new CLI()
@@ -60,7 +78,7 @@ test.cb('compile with env option', (t) => {
 })
 
 test.cb('new', (t) => {
-  t.plan(4)
+  t.plan(5)
 
   cli.on('error', t.end)
   cli.on('warning', t.end)
@@ -68,6 +86,7 @@ test.cb('new', (t) => {
     t.truthy(opts.root)
     t.truthy(opts.emitter)
     t.truthy(opts.locals)
+    t.falsy(opts.template)
   })
   cli.on('success', (res) => {
     t.truthy(res.match(/project created at.*test/))
@@ -75,6 +94,22 @@ test.cb('new', (t) => {
   })
 
   cli.run('new test -o foo:bar')
+})
+
+test.cb('new with template option', (t) => {
+  t.plan(2)
+
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('info', (opts) => {
+    t.truthy(opts.template)
+  })
+  cli.on('success', (res) => {
+    t.truthy(res.match(/project created at.*test/))
+    t.end()
+  })
+
+  cli.run('new test -t foo')
 })
 
 test.cb('watch', (t) => {
@@ -97,4 +132,63 @@ test.cb('watch with env option', (t) => {
   })
 
   cli.run('watch -e production')
+})
+
+test.cb('add', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('success', (res) => {
+    t.truthy(res.name === 'foo')
+    t.truthy(res.src === 'http://github.com/foo/foo')
+    t.truthy(res.emitter)
+    t.end()
+  })
+
+  cli.run('tpl add foo http://github.com/foo/foo')
+})
+
+test.cb('remove', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('success', (res) => {
+    t.truthy(res.name === 'foo')
+    t.truthy(res.emitter)
+    t.end()
+  })
+
+  cli.run('tpl remove foo')
+})
+
+test.cb('default', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('success', (res) => {
+    t.truthy(res.name === 'foo')
+    t.truthy(res.emitter)
+    t.end()
+  })
+
+  cli.run('tpl default foo')
+})
+
+test.cb('list', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('success', (res) => {
+    t.truthy(res.emitter)
+    t.end()
+  })
+
+  cli.run('tpl list')
+})
+
+test.cb('reset', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('success', (res) => {
+    t.truthy(res === 'settings and templates reset')
+    t.end()
+  })
+
+  cli.run('tpl reset')
 })
