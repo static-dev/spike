@@ -37,6 +37,8 @@ Spike is fairly strict in enforcing a default stack. However, the stack allows f
 
 ## Installation
 
+> **NOTE:** You must be using >= node v6.0.0 in order for Spike to work!
+
 - `npm install spike -g`
 - `spike new <projectname>`
 
