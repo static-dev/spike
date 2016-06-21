@@ -110,3 +110,7 @@ module.exports = {
 Since the two configuration files are _merged_, you don't lose all your other settings from the `app.js` file, it just merges in any new ones from `app.production.js`. Very amaze!
 
 To change the environment, just pass `--env name` or `-e name` as an argument to the `compile` or `watch` commands.
+
+### Analytics
+
+Spike's CLI uses basic analytics in order to get more data about how developers are using Spike, so that we can improve this tool more accurately. Analytics are entirely anonymous and the information we collect is minimal.
