@@ -48,6 +48,10 @@ SpikeMock.template = {
   }
 }
 
+SpikeMock.globalConfig = () => {
+  return { id: 'TEST' }
+}
+
 test.beforeEach((t) => {
   CLI.__set__('Spike', SpikeMock)
   cli = new CLI()
