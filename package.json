@@ -17,7 +17,7 @@
     "inquirer": "^1.0.2",
     "lodash.reduce": "^4.4.0",
     "spike-core": "^0.9.0",
-    "universal-analytics": "^0.3.11"
+    "universal-analytics": "^0.4.2"
   },
   "devDependencies": {
     "ava": "^0.15.2",
