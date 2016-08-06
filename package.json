@@ -20,7 +20,7 @@
     "universal-analytics": "^0.4.2"
   },
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "coveralls": "^2.11.12",
     "nyc": "^7.0.0",
     "rewire": "^2.5.1",
