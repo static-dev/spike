@@ -24,7 +24,7 @@
     "coveralls": "^2.11.12",
     "nyc": "^8.1.0",
     "rewire": "^2.5.1",
-    "snazzy": "^4.0.0",
+    "snazzy": "^5.0.0",
     "standard": "^8.0.0"
   },
   "engines": {
