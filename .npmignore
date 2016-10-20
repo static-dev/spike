@@ -2,3 +2,4 @@ test
 contributing.md
 .editorconfig
 .travis.yml
+yarn.lock

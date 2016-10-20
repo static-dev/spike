@@ -16,7 +16,7 @@
     "chalk": "^1.1.3",
     "inquirer": "^1.2.1",
     "lodash.reduce": "^4.6.0",
-    "spike-core": "^0.12.1",
+    "spike-core": "^0.12.2",
     "universal-analytics": "^0.4.2"
   },
   "devDependencies": {
