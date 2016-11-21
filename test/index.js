@@ -121,6 +121,7 @@ test.cb('watch', (t) => {
   cli.on('warning', t.end)
   cli.on('compile', (res) => {
     t.is(res, 'watch mock')
+    t.falsy(mock.opts.server.port)
     t.end()
   })
 
@@ -136,6 +137,17 @@ test.cb('watch with env option', (t) => {
   })
 
   cli.run('watch -e production')
+})
+
+test.cb('watch with port option', (t) => {
+  cli.on('error', t.end)
+  cli.on('warning', t.end)
+  cli.on('compile', (res) => {
+    t.is(mock.opts.server.port, 1118)
+    t.end()
+  })
+
+  cli.run('watch -p 1118')
 })
 
 test.cb('add', (t) => {
