@@ -48,6 +48,44 @@ To read all about how spike works, check out [our documentation](https://spike.r
 
 For information on how to use the command line interface, check [the CLI section](https://spike.readme.io/docs/command-line-interface)
 
+## FAQs
+
+### Adding a postcss plugin
+
+Spike's [default template](https://github.com/static-dev/spike-tpl-base) for creating new projects starts you off with [a single plugin bundle](https://github.com/static-dev/spike-css-standards), which forms the foundation of our [CSS standards](https://spike.readme.io/docs/css-standards).
+
+
+The `postcss` option in `app.js` expects an object with a `plugins` key holding an array of postcss plugins. Alternatively, we can return the object with a function:
+
+```
+const cssStandards = require('spike-css-standards')
+...
+module.exports = {
+...
+  postcss: (ctx) => {
+    return cssStandards({ webpack: ctx })
+  }
+...
+}
+```
+
+In order to take advantage of additional [postcss plugins](http://postcss.parts), we `require` them in `app.js` and add them to the array of the `plugins` key:
+
+```
+const cssStandards = require('spike-css-standards')
+const placehold = require('postcss-placehold')
+...
+module.exports = {
+...
+  postcss: (ctx) => {
+    const css = cssStandards({ webpack: ctx })
+    css.plugins.push(placehold())
+    return css
+  }
+...
+}
+```
+
 ## Analytics
 
 In order to continue improving Spike, we collect anonymous usage data from anyone using the command line tool. This data is important to us because it helps us to know which features are important to users. It also helps us to convince our sponsors about how great this project is and how many people are relying on it, so that its development can continue to be funded. Here's a breakdown of the data we collect:
