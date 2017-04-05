@@ -6,12 +6,12 @@ var cli = new CLI()
 
 cli.on('error', function (err) {
   console.error(chalk.red('✗ ERROR'))
-  console.error(err.stack)
+  console.error(err)
 })
 
 cli.on('warning', function (warn) {
   console.warn(chalk.yellow('⚠ WARNING'))
-  console.warn(warn.stack)
+  console.warn(warn)
 })
 
 cli.on('compile', function (res) {
