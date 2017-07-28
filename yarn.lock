@@ -5217,9 +5217,9 @@ spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
-spike-core@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/spike-core/-/spike-core-2.1.1.tgz#fd72df1f316ddcd122afe6a6276f710bbe09c561"
+spike-core@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/spike-core/-/spike-core-2.2.0.tgz#ace3f6015b30cb84a9250fee42f4418c2fcfea11"
   dependencies:
     babel-core "^6.25.0"
     babel-loader "^7.1.1"
@@ -5240,7 +5240,7 @@ spike-core@^2.1.1:
     source-loader "^1.0.0"
     spike-util "^1.3.0"
     sprout "^1.2.1"
-    webpack "^3.3.0"
+    webpack "^3.4.1"
     when "^3.7.8"
 
 spike-util@^1.3.0:
@@ -5882,9 +5882,9 @@ webpack-sources@^1.0.1:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
 
-webpack@^3.3.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.4.0.tgz#e9465b660ad79dd2d33874d968b31746ea9a8e63"
+webpack@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.4.1.tgz#4c3f4f3fb318155a4db0cb6a36ff05c5697418f4"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
