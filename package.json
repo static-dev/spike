@@ -22,10 +22,10 @@
   "devDependencies": {
     "ava": "^0.21.0",
     "coveralls": "^2.13.1",
+    "husky": "^0.14.3",
     "nyc": "^11.0.3",
-    "rewire": "^2.5.1",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.2"
+    "prettier": "^1.5.3",
+    "rewire": "^2.5.1"
   },
   "engines": {
     "node": ">=6.0.0",
@@ -43,9 +43,8 @@
   "scripts": {
     "coverage": "nyc --reporter=html ava && open coverage/index.html",
     "coveralls": "nyc --reporter=lcov ava && cat ./coverage/lcov.info | coveralls",
-    "lint": "standard --verbose | snazzy",
-    "precommit": "npm run lint -s",
-    "pretest": "npm run lint -s",
+    "lint": "prettier --no-semi --single-quote --write '**/*.js'",
+    "precommit": "npm run lint",
     "test": "ava "
   }
 }
