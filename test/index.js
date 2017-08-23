@@ -1,5 +1,5 @@
 const rewire = require('rewire')
-const {EventEmitter} = require('events')
+const { EventEmitter } = require('events')
 const test = require('ava')
 let CLI = rewire('..')
 
@@ -8,7 +8,7 @@ let mock
 
 // mock so that this only tests the CLI interface, not the spike tasks
 class SpikeMock extends EventEmitter {
-  constructor (opts) {
+  constructor(opts) {
     super()
     this.opts = opts
     this.config = {}
@@ -16,31 +16,31 @@ class SpikeMock extends EventEmitter {
     mock = this
   }
 
-  compile () {
+  compile() {
     this.emit('compile', 'compile mock')
   }
 
-  watch () {
+  watch() {
     this.emit('compile', 'watch mock')
   }
 
-  static new (opts) {
+  static new(opts) {
     opts.emitter.emit('info', opts)
     opts.emitter.emit('done', new this())
   }
 }
 
 SpikeMock.template = {
-  add: (opts) => {
+  add: opts => {
     opts.emitter.emit('success', opts)
   },
-  remove: (opts) => {
+  remove: opts => {
     opts.emitter.emit('success', opts)
   },
-  default: (opts) => {
+  default: opts => {
     opts.emitter.emit('success', opts)
   },
-  list: (opts) => {
+  list: opts => {
     opts.emitter.emit('success', opts)
   },
   reset: () => {
@@ -52,17 +52,17 @@ SpikeMock.globalConfig = () => {
   return { id: 'TEST' }
 }
 
-test.beforeEach((t) => {
+test.beforeEach(t => {
   CLI.__set__('Spike', SpikeMock)
   cli = new CLI()
 })
 
-test.cb('compile', (t) => {
+test.cb('compile', t => {
   t.truthy(cli)
 
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('compile', (res) => {
+  cli.on('compile', res => {
     t.is(res, 'compile mock')
     t.end()
   })
@@ -70,10 +70,10 @@ test.cb('compile', (t) => {
   cli.run('compile')
 })
 
-test.cb('compile with env option', (t) => {
+test.cb('compile with env option', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('compile', (res) => {
+  cli.on('compile', res => {
     t.is(mock.opts.env, 'production')
     t.end()
   })
@@ -81,18 +81,18 @@ test.cb('compile with env option', (t) => {
   cli.run('compile -e production')
 })
 
-test.cb('new', (t) => {
+test.cb('new', t => {
   t.plan(5)
 
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('info', (opts) => {
+  cli.on('info', opts => {
     t.truthy(opts.root)
     t.truthy(opts.emitter)
     t.truthy(opts.locals)
     t.falsy(opts.template)
   })
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res.match(/project created at.*test/))
     t.end()
   })
@@ -100,15 +100,15 @@ test.cb('new', (t) => {
   cli.run('new test -o foo:bar')
 })
 
-test.cb('new with template option', (t) => {
+test.cb('new with template option', t => {
   t.plan(2)
 
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('info', (opts) => {
+  cli.on('info', opts => {
     t.truthy(opts.template)
   })
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res.match(/project created at.*test/))
     t.end()
   })
@@ -116,10 +116,10 @@ test.cb('new with template option', (t) => {
   cli.run('new test -t foo')
 })
 
-test.cb('watch', (t) => {
+test.cb('watch', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('compile', (res) => {
+  cli.on('compile', res => {
     t.is(res, 'watch mock')
     t.falsy(mock.opts.server.port)
     t.end()
@@ -128,10 +128,10 @@ test.cb('watch', (t) => {
   cli.run('watch')
 })
 
-test.cb('watch with env option', (t) => {
+test.cb('watch with env option', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('compile', (res) => {
+  cli.on('compile', res => {
     t.is(mock.opts.env, 'production')
     t.end()
   })
@@ -139,10 +139,10 @@ test.cb('watch with env option', (t) => {
   cli.run('watch -e production')
 })
 
-test.cb('watch with port option', (t) => {
+test.cb('watch with port option', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('compile', (res) => {
+  cli.on('compile', res => {
     t.is(mock.opts.server.port, 1118)
     t.end()
   })
@@ -150,10 +150,10 @@ test.cb('watch with port option', (t) => {
   cli.run('watch -p 1118')
 })
 
-test.cb('add', (t) => {
+test.cb('add', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res.name === 'foo')
     t.truthy(res.src === 'http://github.com/foo/foo')
     t.truthy(res.emitter)
@@ -163,10 +163,10 @@ test.cb('add', (t) => {
   cli.run('tpl add foo http://github.com/foo/foo')
 })
 
-test.cb('remove', (t) => {
+test.cb('remove', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res.name === 'foo')
     t.truthy(res.emitter)
     t.end()
@@ -175,10 +175,10 @@ test.cb('remove', (t) => {
   cli.run('tpl remove foo')
 })
 
-test.cb('default', (t) => {
+test.cb('default', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res.name === 'foo')
     t.truthy(res.emitter)
     t.end()
@@ -187,21 +187,21 @@ test.cb('default', (t) => {
   cli.run('tpl default foo')
 })
 
-test.cb('list', (t) => {
+test.cb('list', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('success', (res) => {
-    t.truthy(res.emitter)
+  cli.on('success', res => {
+    t.truthy(res.match(/- emitter/))
     t.end()
   })
 
   cli.run('tpl list')
 })
 
-test.cb('reset', (t) => {
+test.cb('reset', t => {
   cli.on('error', t.end)
   cli.on('warning', t.end)
-  cli.on('success', (res) => {
+  cli.on('success', res => {
     t.truthy(res === 'settings and templates reset')
     t.end()
   })
