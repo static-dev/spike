@@ -12,19 +12,19 @@
   },
   "bugs": "https://github.com/static-dev/spike/issues",
   "dependencies": {
-    "argparse": "^1.0.9",
-    "chalk": "^2.0.0",
+    "argparse": "^1.0.10",
+    "chalk": "^2.4.1",
     "inquirer": "^3.2.1",
     "lodash.reduce": "^4.6.0",
-    "spike-core": "^2.2.0",
-    "universal-analytics": "^0.4.13"
+    "spike-core": "^2.2.1",
+    "universal-analytics": "^0.4.17"
   },
   "devDependencies": {
-    "ava": "^0.21.0",
-    "coveralls": "^2.13.1",
+    "ava": "^0.25.0",
+    "coveralls": "^3.0.1",
     "husky": "^0.14.3",
-    "nyc": "^11.0.3",
-    "prettier": "^1.5.3",
+    "nyc": "^12.0.2",
+    "prettier": "^1.13.5",
     "rewire": "^2.5.1"
   },
   "engines": {
