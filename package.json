@@ -16,15 +16,15 @@
     "chalk": "^2.4.1",
     "inquirer": "^3.2.1",
     "lodash.reduce": "^4.6.0",
-    "spike-core": "^2.2.1",
+    "spike-core": "^2.3.0",
     "universal-analytics": "^0.4.17"
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "coveralls": "^3.0.1",
+    "coveralls": "^3.0.2",
     "husky": "^0.14.3",
     "nyc": "^12.0.2",
-    "prettier": "^1.13.5",
+    "prettier": "^1.13.7",
     "rewire": "^2.5.1"
   },
   "engines": {
