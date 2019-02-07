@@ -4,6 +4,10 @@
 
 A modern static build tool, powered by [webpack](http://webpack.github.io)
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> Note: This project is currently unmaintained. If you are interested in taking over maintenance, please reach out!
+
 ## What is Spike?
 
 [We](https://github.com/carrot) [:heart:](http://giphy.com/gifs/steve-carell-cute-the-office-Yb8ebQV8Ua2Y0/tile) [static](https://www.smashingmagazine.com/2015/11/modern-static-website-generators-next-big-thing/).
