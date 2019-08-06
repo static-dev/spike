@@ -4,14 +4,15 @@ var chalk = require('chalk')
 var CLI = require('..')
 var cli = new CLI()
 
+const framer = require('code-frame')
+const fs = require('fs')
+
 cli.on('error', function (err) {
-  console.error(chalk.red('✗ ERROR'))
-  console.error(err)
+  console.error(chalk.red('✗ ERROR'), buildMessage(err))
 })
 
 cli.on('warning', function (warn) {
-  console.warn(chalk.yellow('⚠ WARNING'))
-  console.warn(warn)
+  console.warn(chalk.yellow('⚠ WARNING'), buildMessage(warn))
 })
 
 cli.on('compile', function (res) {
@@ -28,3 +29,22 @@ cli.on('info', function (msg) {
 })
 
 cli.run(process.argv.slice(2))
+
+const fileInfoRe = /\/.*\..*\:\d+\:\d+/g
+function buildMessage(err) {
+  let tmp = err.stack.toString().split('\n')
+  let fileInfo = fileInfoRe.exec(tmp[0])
+  if (!fileInfo) fileInfo = fileInfoRe.exec(tmp[1])
+  if (!fileInfo) return err.toString()
+
+  fileInfo = fileInfo[0].split(':')
+  let filepath = fileInfo[0]
+  let line = fileInfo.length > 1 ? parseInt(fileInfo[1], 10) : null
+  let column = fileInfo.length > 2 ? parseInt(fileInfo[2], 10) : null
+
+  let errorInfo = tmp[0].split(': ')
+  let msg = `(${errorInfo[0]}) ${errorInfo[1]}\n`
+  let snippet = framer(fs.readFileSync(filepath, 'utf8'), line, column)
+
+  return `${msg}\n ${fileInfo.join(':')}\n${snippet}`
+}
